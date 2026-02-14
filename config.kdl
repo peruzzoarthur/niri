@@ -168,7 +168,7 @@ binds {
     Mod+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
     Mod+E hotkey-overlay-title="Run an Application: yazi" { spawn "kitty" "yazi"; }
     Mod+P hotkey-overlay-title="Run an Application: btop" { spawn "kitty" "btop"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -323,6 +323,9 @@ binds {
     // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
     // Mod+]       { switch-layout "next"; }
     // Mod+[ { switch-layout "prev"; }
+
+    // Switch keyboard layout with Alt+Space
+    Alt+Space { switch-layout "next"; }
 
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
