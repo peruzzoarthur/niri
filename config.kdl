@@ -81,8 +81,10 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "noctalia-shell"
 
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+spawn-sh-at-startup "openrgb -p ozzu"
 
 hotkey-overlay {
     skip-at-startup
@@ -133,28 +135,27 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    geometry-corner-radius 12
+window-rule {
+    geometry-corner-radius 2
     clip-to-geometry true
 }
 
 // Custom workspace rules
 // Open kitty always on workspace 3
-window-rule {
-    match app-id="kitty"
-    open-on-workspace "1"
-}
+// window-rule {
+//     match app-id="kitty"
+//     open-on-workspace "1"
+// }
 // Open Firefox always on workspace 2 
-window-rule {
-    match app-id=r#"firefox$"#
-    open-on-workspace "2"
-}
-
+// window-rule {
+//     match app-id=r#"firefox$"#
+//     open-on-workspace "2"
+// }
 // Open legcord always on workspace 7
-window-rule {
-    match app-id=r#"legcord$"#
-    open-on-workspace "7"
-}
+// window-rule {
+//     match app-id=r#"legcord$"#
+//     open-on-workspace "7"
+// }
 
 
 binds {
