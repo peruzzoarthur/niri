@@ -182,12 +182,12 @@ binds {
     Mod+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
     Mod+E hotkey-overlay-title="Run an Application: yazi" { spawn "kitty" "yazi"; }
     Mod+P hotkey-overlay-title="Run an Application: btop" { spawn "kitty" "btop"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
     Mod+M hotkey-overlay-title="wlr-which-key" { spawn "wlr-which-key";}
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
+Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
     Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show drun"; }
     Mod+S hotkey-overlay-title="Noctalia control center" { spawn-sh "noctalia-shell ipc call controlCenter toggle";}
@@ -341,7 +341,7 @@ binds {
     // Mod+[ { switch-layout "prev"; }
 
     // Switch keyboard layout with Alt+Space
-    Alt+Space { switch-layout "next"; }
+    Mod+Alt+Space { switch-layout "next"; }
 
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
