@@ -341,7 +341,7 @@ Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctali
     // Mod+[ { switch-layout "prev"; }
 
     // Switch keyboard layout with Alt+Space
-    Mod+Alt+Space { switch-layout "next"; }
+    Shift+Ctrl+K { switch-layout "next"; }
 
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
