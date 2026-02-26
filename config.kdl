@@ -72,6 +72,8 @@ layout {
     border {
         off
     }
+
+    background-color "transparent"
 }
 
 // Add lines like this to spawn processes at startup.
@@ -379,4 +381,22 @@ gestures {
     hot-corners {
         off
     }
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
+
+// Set the regular wallpaper on the backdrop.
+layer-rule {
+  match namespace="^noctalia-wallpaper*"
+  place-within-backdrop true
+}
+
+// Optionally, disable the workspace shadows in the overview.
+overview {
+  workspace-shadow {
+    off
+  }
 }
