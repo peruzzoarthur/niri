@@ -191,7 +191,8 @@ binds {
     // For example, this is a standard bind to toggle the screen reader (orca).
 Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
-    Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show drun"; }
+    // Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show drun"; }
+    Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
     Mod+S hotkey-overlay-title="Noctalia control center" { spawn-sh "noctalia-shell ipc call controlCenter toggle";}
     Mod+Shift+S hotkey-overlay-title="Noctalia settings" { spawn-sh "noctalia-shell ipc call settings toggle";}
     Mod+N hotkey-overlay-title="Run an Application: coldnote" { spawn-sh "kitty bun run ~/coldLab/tui/cold-note-opentui/src/index.tsx"; }
