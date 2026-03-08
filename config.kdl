@@ -258,7 +258,10 @@ Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctali
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-    Mod+Page_Down      { focus-workspace-down; }
+    // Mod+Page_Down      { focus-workspace-down; }
+    // Mod+Page_Up        { focus-workspace-up; }
+    Alt+J              { focus-workspace-down; }
+    Alt+K              { focus-workspace-up; }
     Mod+Page_Up        { focus-workspace-up; }
     Mod+U              { focus-workspace-down; }
     Mod+I              { focus-workspace-up; }
@@ -365,7 +368,7 @@ Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctali
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
 
-    Mod+Alt+P { power-off-monitors; }
+    Mod+Shift+Alt+L  hotkey-overlay-title="Power off monitors" { power-off-monitors; }
 }
 
 gestures {
