@@ -398,3 +398,5 @@ overview {
     off
   }
 }
+
+include "animations/pixelate.kdl"
