@@ -62,7 +62,7 @@ layout {
     focus-ring {
         // off
         width 3 
-        active-color "#BB9DBD"
+        active-color "#9587c0"
         inactive-color "#505050"
         // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
@@ -71,8 +71,6 @@ layout {
     border {
         off
     }
-
-    background-color "transparent"
 }
 
 // Add lines like this to spawn processes at startup.
@@ -81,7 +79,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "noctalia-shell"
+// spawn-at-startup "noctalia-shell"
 
 // Export niri socket to systemd for services like swayidle
 // spawn-sh-at-startup "systemctl --user import-environment NIRI_SOCKET"
@@ -92,7 +90,7 @@ spawn-at-startup "noctalia-shell"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 spawn-sh-at-startup "openrgb -p ozzu"
-// spawn-at-startup "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1"
+spawn-at-startup "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1"
 
 hotkey-overlay {
     skip-at-startup
@@ -101,7 +99,7 @@ hotkey-overlay {
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 animations {
-    off
+    // off
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
 }
@@ -120,7 +118,11 @@ window-rule {
     default-column-width {}
 }
 
+// Open the Firefox picture-in-picture player as floating by default.
 window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
@@ -150,16 +152,6 @@ window-rule {
     // open-on-workspace "a"
 }
 
-// Floating tmux sessions (spawned from shell via `float` command)
-window-rule {
-    match app-id="tmux-float"
-    open-floating true
-    default-column-width { proportion 0.95; }
-    default-window-height { proportion 0.95; }
-    geometry-corner-radius 8
-    clip-to-geometry true
-}
-
 
 // Custom workspace rules
 // Open kitty always on workspace 3
@@ -183,26 +175,24 @@ binds {
     // Most actions that you can bind here can also be invoked programmatically with
     // `niri msg action do-something`.
     Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // Suggested binds for running programs: terminal, app launcher, screen locker.
+    Mod+Space hotkey-overlay-title="open a terminal: kitty" { spawn "kitty"; }
+    Mod+T hotkey-overlay-title="open a terminal: kitty" { spawn "kitty"; }
     Mod+B hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
     Mod+E hotkey-overlay-title="Run an Application: yazi" { spawn "kitty" "yazi"; }
     Mod+P hotkey-overlay-title="Run an Application: btop" { spawn "kitty" "btop"; }
-    Mod+M hotkey-overlay-title="wlr-which-key" { spawn "wlr-which-key";}
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
-Mod+Space hotkey-overlay-title="open a terminal: kitty" {
-      spawn-sh "test -S /tmp/mykitty && kitty || kitty --listen-on unix:/tmp/mykitty";
-  }
-Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
+    // For example, this is a standard bind to toggle the screen reader (orca).
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
-    // Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show drun"; }
-    Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
+    Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show drun"; }
     Mod+S hotkey-overlay-title="Noctalia control center" { spawn-sh "noctalia-shell ipc call controlCenter toggle";}
     Mod+Shift+S hotkey-overlay-title="Noctalia settings" { spawn-sh "noctalia-shell ipc call settings toggle";}
     Mod+N hotkey-overlay-title="Run an Application: coldnote" { spawn-sh "kitty bun run ~/coldLab/tui/cold-note-opentui/src/index.tsx"; }
     Mod+Shift+P hotkey-overlay-title="Noctalia control center" { spawn-sh "noctalia-shell ipc call systemMonitor toggle";}
-    Alt+C { spawn-sh "wlrctl pointer click left"; }
-
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
@@ -262,10 +252,7 @@ Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctali
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-    // Mod+Page_Down      { focus-workspace-down; }
-    // Mod+Page_Up        { focus-workspace-up; }
-    Alt+J              { focus-workspace-down; }
-    Alt+K              { focus-workspace-up; }
+    Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
     Mod+U              { focus-workspace-down; }
     Mod+I              { focus-workspace-up; }
@@ -336,7 +323,7 @@ Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctali
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    Mod+T      { toggle-window-floating; }
+    Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
@@ -353,7 +340,7 @@ Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctali
     // Mod+[ { switch-layout "prev"; }
 
     // Switch keyboard layout with Alt+Space
-    Shift+Ctrl+K { switch-layout "next"; }
+    Alt+Space { switch-layout "next"; }
 
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
@@ -372,7 +359,7 @@ Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctali
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
 
-    Mod+Shift+Alt+L  hotkey-overlay-title="Power off monitors" { power-off-monitors; }
+    Mod+Alt+P { power-off-monitors; }
 }
 
 gestures {
@@ -392,23 +379,3 @@ gestures {
         off
     }
 }
-
-debug {
-  // Allows notification actions and window activation from Noctalia.
-  honor-xdg-activation-with-invalid-serial
-}
-
-// Set the regular wallpaper on the backdrop.
-layer-rule {
-  match namespace="^noctalia-wallpaper*"
-  place-within-backdrop true
-}
-
-// Optionally, disable the workspace shadows in the overview.
-overview {
-  workspace-shadow {
-    off
-  }
-}
-
-// include "animations/pixelate.kdl"

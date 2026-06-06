@@ -1,0 +1,10 @@
+  #!/bin/env nu
+  def main [] {
+      if ("/tmp/mykitty" | path exists) {
+          # Socket exists - just open a new window in existing instance
+          kitty @ --to unix:/tmp/mykitty launch --cwd=current
+      } else {
+          # No socket - start the first instance with remote control
+          kitty --listen-on unix:/tmp/mykitty
+      }
+  }
