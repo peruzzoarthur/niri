@@ -31,6 +31,12 @@ output "DP-1" {
     position x=0 y=0
 }
 
+output "HDMI-A-1" {
+    mode "1920x1080@60.000"
+    transform "normal"
+    position x=1920 y=0
+}
+
 layout {
     // Set gaps around windows in logical pixels.
     gaps 12
@@ -81,7 +87,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "noctalia-shell"
+// spawn-at-startup "noctalia"
 
 // Export niri socket to systemd for services like swayidle
 // spawn-sh-at-startup "systemctl --user import-environment NIRI_SOCKET"
@@ -196,7 +202,7 @@ Mod+Space hotkey-overlay-title="open a terminal: kitty" {
 Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
     // Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show drun"; }
-    Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
+    Mod+Ctrl+Space hotkey-overlay-title="Run an Application: rofi" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S hotkey-overlay-title="Noctalia control center" { spawn-sh "noctalia-shell ipc call controlCenter toggle";}
     Mod+Shift+S hotkey-overlay-title="Noctalia settings" { spawn-sh "noctalia-shell ipc call settings toggle";}
     Mod+N hotkey-overlay-title="Run an Application: coldnote" { spawn-sh "kitty bun run ~/coldLab/tui/cold-note-opentui/src/index.tsx"; }
@@ -409,6 +415,13 @@ overview {
   workspace-shadow {
     off
   }
+}
+
+window-rule {
+  match app-id="dev.noctalia.Noctalia.Settings"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
 }
 
 // include "animations/pixelate.kdl"
